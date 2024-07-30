@@ -1,0 +1,141 @@
+body {
+  font-family: Arial, Helvetica, sans-serif;
+  position: relative;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+
+}
+
+* {
+  box-sizing: border-box;
+}
+
+.container2 {
+  padding-left: 15px;
+  padding-right: 15px;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  background-color: white;
+  width: 100%;
+  border-radius: 0;
+  border: 1px white solid;
+  display: flex;
+  justify-content: space-between;
+  }
+
+.container {
+  padding: 16px;
+  background-color: white;
+  width: 60%;
+  margin: auto;
+  border-radius: 5px;
+  border: 2px #797D80 solid;
+  }
+
+  #firstSelect, #secondSelect, #productionDate, expiryDate{
+  margin-bottom: 20px;
+  }
+
+/* Full-width input fields */
+input[type=text]{
+  width: 100%;
+  padding: 5px;
+  margin: 5px 0 22px 0;
+  display: inline-block;
+  border: none;
+  background: #f1f1f1;
+  font-size: 16px;
+}
+
+input[type=text]:focus {
+  background-color: #ddd;
+  outline: none;
+  border-radius: none;
+}
+
+/* Set a style for the generate QRcode button */
+.generateBtn {
+  background-color: #6A050F;
+  color: white;
+  padding: 16px 20px;
+  margin: 30px 0px 0px 0px;
+  border: none;
+  cursor: pointer;
+  width: 100%;
+  opacity: 0.9;
+}
+
+.scannerBtn {
+  background-color: #6A050F;
+  color: white;
+  padding: 12px 15px;
+  margin: 0px 0px 0px 0px;
+  border: none;
+  cursor: pointer;
+  width: 100%;
+  opacity: 0.9;
+  border-radius: 5px;
+}
+
+.generateBtn:hover {
+  opacity: 1;
+}
+
+/* Add a blue text color to links */
+a {
+  color: dodgerblue;
+}
+
+/* Set a grey background color and center the text of the "sign in" section */
+.signin {
+  background-color: #f1f1f1;
+  text-align: center;
+}
+
+
+/* container style for the hidden download form */
+#container {
+  padding: 16px;
+  background-color: white;
+  width: 50%;
+  margin: auto;
+  border-radius: 5px;
+  }
+
+          .containerShowQR-page {
+              display: flex;
+              justify-content: center;
+              align-items: center;
+              text-align: center;
+
+          }
+
+          .qr-code-container {
+              width: 50%;
+              margin: auto;
+              justify-content: center;
+              align-items: center;
+              text-align: center;
+              padding: 16px 20px;
+
+          }
+
+         #downloadBtn, #downloadCsvBtn {
+           background-color: #6A050F;
+           color: white;
+           padding: 16px 20px;
+           margin: 30px 0px 0px 0px;
+           border: none;
+           cursor: pointer;
+           opacity: 0.9;
+         }
+         #showFormLink{
+         background-color: #0A0A0A;
+         color: white;
+         padding: 16px 20px;
+         margin: 30px 0px 0px 0px;
+         border: none;
+         cursor: pointer;
+         opacity: 0.9;
+         }

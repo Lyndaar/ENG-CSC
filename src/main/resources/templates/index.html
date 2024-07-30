@@ -1,0 +1,257 @@
+<html xmlns:th="https://www.thymeleaf.org">
+<head>
+    <title>QRCodeGenerator SpringBoot</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <link th:href="@{/css/qrcode.css}" rel="stylesheet" />
+</head>
+<body>
+<div class="container2">
+    <img src="css/logo.png" alt="Logo" style="display: block; width: 20%; height: 9%;">
+        <a style="text-decoration: none; width: 20%; height: 9%;" href="scan">
+            <button type="submit" class="scannerBtn" >Scan Code</button>
+        </a>
+
+</div>
+<div style="background: #F1F3F4; padding-top:4%;">
+    <form method="POST" enctype="multipart/form-data" action="/showQRCode" th:object="${qrCodeForm}">
+        <div class="container">
+        <h1>Product QR Code Form</h1>
+        <hr>
+            <label for="producerName" class="form-label">Enter Your Name</label>
+            <input type="text" class="form-control form-control-lg" placeholder="Name" id="producerName"
+                   name="producerName" required th:field="*{producerName}">
+
+            <label for="batchNo" class="form-label">Enter Batch Number</label>
+            <input type="text" class="form-control form-control-lg" placeholder="" id="batchNo"
+                   name="batchNo" required th:field="*{batchNo}">
+
+            <label for="productType" class="form-label">Select Product Type</label>
+            <select id="productType" name="productType" class="form-control form-control-lg" required th:field="*{productType}">
+                <option value="">Select...</option>
+                <option value="ice_cream">ICE CREAM</option>
+                <option value="ice_cream_cake">ICE CREAM CAKE</option>
+                <option value="raw_materials">RAW MATERIALS</option>
+            </select>
+
+            <label for="productItem" class="form-label">Select a Product Item</label>
+            <select id="productItem" name="productItem" class="form-control form-control-lg" required th:field="*{productItem}" onchange="calculateExpiryDate()">
+                <option value="">Select...</option>
+                <!-- The options here will be populated based on the first select -->
+                <option value='chocolate_ice_cream'>Chocolate Ice Cream</option>
+                <option value='mud_pie_ice_cream'>Mud Pie Ice Cream</option>
+                <option value='sweet_cream_ice_cream'>Sweet Cream Ice Cream</option>
+                <option value='french_vanilla_ice_cream'>French Vanilla Ice Cream</option>
+                <option value='coconut_ice_cream'>Coconut Ice Cream</option>
+                <option value='chesse_cake_flavoring'>Chesse Cake Flavoring</option>
+                <option value='cake_batter_ice_cream'>Cake Batter Ice Cream</option>
+                <option value='strawberry_ice_cream'>Strawberry Ice Cream</option>
+                <option value='coffee_ice_cream'>Coffee Ice Cream</option>
+                <option value='mint_ice_cream'>Mint Ice Cream</option>
+                <option value='cotton_candy'>Cotton Candy</option>
+                <option value='orange_dreamsicle'>Orange Dreamsicle</option>
+                <option value='sweet_banana_cream'>Sweet Banana Cream</option>
+                <option value='sweet_raspberry_cream'>Sweet Raspberry Cream</option>
+                <option value='strawberry_cake_batter'>Strawberry Cake Batter</option>
+                <option value='ginger_lemon'>Ginger Lemon</option>
+                <option value='baileys_cream'>Baileys Cream</option>
+                <option value='salted_caramel'>Salted Caramel</option>
+                <option value='sweet_amarula'>Sweet Amarula</option>
+                <option value='malt_tease_me_ice_cream'>Malt Tease Me Ice Cream</option>
+                <option value='midnight_delight'>Midnight Delight</option>
+                <option value='chocolate_chipper'>Chocolate Chipper</option>
+                <option value='malted_chocolate_ice_cream'>Malted Chocolate Ice Cream</option>
+                <option value='americone_ice_cream'>Americone Ice Cream</option>
+                <option value='henenessy_ice_cream'>Henenessy Ice Cream</option>
+                <option value='cookies_cream'>Cookies Cream</option>
+                <option value='cookie_dough'>Cookie Dough</option>
+                <option value='rum_raisin'>Rum Raisin</option>
+                <option value='chocolate_creamery_fudge'>Chocolate Creamery Fudge</option>
+                <option value='sweet_malted_cream'>Sweet Malted Cream</option>
+                <option value='creamery_delight'>Creamery Delight</option>
+                <option value='sweet_pineapple_cream'>Sweet Pineapple Cream</option>
+                <option value='cheesecake_lotus'>Cheesecake Lotus</option>
+                <option value='yellow_cake'>Yellow Cake</option>
+                <option value='chocolate_cake'>Chocolate Cake</option>
+                <option value='red_velvet'>Red Velvet</option>
+                <option value='brownie'>Brownie</option>
+                <option value='birthday_cake'>Birthday Cake</option>
+                <option value='strawberry_passion'>Strawberry Passion</option>
+                <option value='cookies_creamery'>Cookies Creamery</option>
+                <option value='pinacolada'>Pinacolada</option>
+                <option value='cheesecake_named_desire'>Cheesecake Named Desire</option>
+                <option value='cookie_dough_delirium'>Cookie Dough Delirium</option>
+                <option value='better_cream'>Better Cream</option>
+                <option value='thawed_mix'>Thawed Mix</option>
+                <option value='cookie_dough'>Cookie Dough</option>
+                <option value='strawberry_iqf'>Strawberry IQF</option>
+                <option value='blueberry_iqf'>Blueberry IQF</option>
+                <option value='raspberry_iqf'>Raspberry IQF</option>
+                <option value='pineapple_tidbit'>Pineapple Tidbit</option>
+            </select>
+
+            <label for="productionDate" class="form-label">Production Date</label>
+            <input type="date" class="form-control form-control-lg" id="productionDate" name="productionDate" required th:field="*{productionDate}" onchange="calculateExpiryDate()">
+            <label for="expiryDate" class="form-label">Expiry Date</label>
+            <input type="date" class="form-control form-control-lg" id="expiryDate"
+                   name="expiryDate" required th:field="*{expiryDate}" readonly>
+
+                <div class="mb-3">
+                    <button type="submit" class="generateBtn">Generate QR Code</button>
+                </div>
+        </div>
+    </form>
+</div>
+<script>
+    $('#productType').change(function() {
+        var selectedOption = $(this).val();
+        // Clear the second select options
+     $('#productItem').empty();
+
+if (selectedOption === 'ice_cream') {
+    $('#productItem').append('<option value="chocolate_ice_cream">CHOCOLATE ICE CREAM</option>');
+    $('#productItem').append('<option value="mud_pie_ice_cream">CHOCOLATE MUD PIE  ICE CREAM</option>');
+    $('#productItem').append('<option value="malt_tease_me_ice_cream">MALT TEASE ME ICE CREAM</option>');
+    $('#productItem').append('<option value="malted_chocolate_ice_cream">MALTED CHOCOLATE ICE CREAM</option>');
+    $('#productItem').append('<option value="sweet_cream_ice_cream">SWEET CREAM ICE CREAM</option>');
+    $('#productItem').append('<option value="french_vanilla_ice_cream">FRENCH VANILLA ICE CREAM</option>');
+    $('#productItem').append('<option value="coconut_ice_cream">COCONUT ICE CREAM</option>');
+    $('#productItem').append('<option value="cheese_cake_flavoring">CHESSE CAKE FLAVORING</option>');
+    $('#productItem').append('<option value="cake_batter_ice_cream">CAKE BATTER ICE CREAM</option>');
+    $('#productItem').append('<option value="strawberry_ice_cream">STRAWBERRY ICE CREAM</option>');
+    $('#productItem').append('<option value="coffee_ice_cream">COFFEE ICE CREAM</option>');
+    $('#productItem').append('<option value="mint_ice_cream">MINT ICE CREAM</option>');
+    $('#productItem').append('<option value="cotton_candy">COTTON CANDY</option>');
+    $('#productItem').append('<option value="orange_dreamsicle">ORANGE DREAMSICLE</option>');
+    $('#productItem').append('<option value="sweet_banana_cream">SWEET BANANA CREAM</option>');
+    $('#productItem').append('<option value="sweet_raspberry_cream">SWEET RASPBERRY CREAM</option>');
+    $('#productItem').append('<option value="strawberry_cake_batter">STRAWBERRY CAKE BATTER</option>');
+    $('#productItem').append('<option value="ginger_lemon">GINGER LEMON</option>');
+    $('#productItem').append('<option value="baileys_cream">BAILEYS CREAM</option>');
+    $('#productItem').append('<option value="salted_caramel">SALTED CARAMEL</option>');
+    $('#productItem').append('<option value="sweet_amarula">SWEET AMARULA</option>');
+    $('#productItem').append('<option value="americone_ice_cream">AMERICONE ICE CREAM</option>');
+    $('#productItem').append('<option value="henenessy_ice_cream">HENNESSY ICE CREAM</option>');
+    $('#productItem').append('<option value="cookies_cream">COOKIES & CREAM</option>');
+    $('#productItem').append('<option value="cookie_dough">COOKIE DOUGH</option>');
+    $('#productItem').append('<option value="rum_raisin">RUM & RAISIN</option>');
+    $('#productItem').append('<option value="chocolate_creamery_fudge">CHOCOLATE CREAMERY FUDGE</option>');
+    $('#productItem').append('<option value="sweet_malted_cream">SWEET MALTED CREAM</option>');
+    $('#productItem').append('<option value="creamery_delight">CREAMERY DELIGHT</option>');
+    $('#productItem').append('<option value="sweet_pineapple_cream">SWEET PINEAPPLE CREAM</option>');
+    $('#productItem').append('<option value="cheesecake_lotus">CHEESECAKE LOTUS</option>');
+} else if (selectedOption === 'ice_cream_cake') {
+    $('#productItem').append('<option value="birthday_cake">BIRTHDAY CAKE</option>');
+    $('#productItem').append('<option value="strawberry_passion">STRAWBERRY PASSION</option>');
+    $('#productItem').append('<option value="cookies_creamery">COOKIES & CREAMERY</option>');
+    $('#productItem').append('<option value="pinacolada">PINACOLADA</option>');
+    $('#productItem').append('<option value="midnight_delight">MIDNIGHT DELIGHT</option>');
+    $('#productItem').append('<option value="chocolate_chipper">CHOCOLATE CHIPPER</option>');
+    $('#productItem').append('<option value="chessecake_named_desire">CHEESECAKE NAMED DESIRE</option>');
+    $('#productItem').append('<option value="cookie_dough_delirum">COOKIE DOUGH DELIRIUM</option>');
+} else if (selectedOption === 'raw_materials') {
+    $('#productItem').append('<option value="better_cream">BETTER CREAM</option>');
+    $('#productItem').append('<option value="pineapple_tidbit">PINEAPPLE TIDBIT</option>');
+    $('#productItem').append('<option value="cookie_dough">COOKIE DOUGH</option>');
+    $('#productItem').append('<option value="yellow_cake">YELLOW CAKE</option>');
+    $('#productItem').append('<option value="chocolate_cake">CHOCOLATE CAKE</option>');
+    $('#productItem').append('<option value="red_velvet">RED VELVET</option>');
+    $('#productItem').append('<option value="strawberry_IQF">STRAWBERRY IQF</option>');
+    $('#productItem').append('<option value="blueberry_IQF">BLUEBERRY IQF</option>');
+    $('#productItem').append('<option value="raspberry_IQF">RASPBERRY IQF</option>');
+    $('#productItem').append('<option value="thawed_mix">THAWED MIX</option>');
+    $('#productItem').append('<option value="brownie">BROWNIE</option>');
+        }
+    });
+
+    function calculateExpiryDate() {
+        var productionDate = new Date(document.getElementById('productionDate').value);
+<!--        var expiryDate = new Date(productionDate);-->
+        var additionalDays;
+        var productItem = document.getElementById('productItem').value;
+        switch (productItem) {
+            case 'chocolate_ice_cream':
+            case 'mud_pie_ice_cream':
+            case 'sweet_cream_ice_cream':
+            case 'french_vanilla_ice_cream':
+            case 'coconut_ice_cream':
+            case 'chesse_cake_flavoring':
+            case 'cake_batter_ice_cream':
+            case 'strawberry_ice_cream':
+            case 'coffee_ice_cream':
+            case 'mint_ice_cream':
+            case 'cotton_candy':
+            case 'orange_dreamsicle':
+            case 'sweet_banana_cream':
+            case 'sweet_raspberry_cream':
+            case 'strawberry_cake_batter':
+            case 'ginger_lemon':
+            case 'baileys_cream':
+            case 'salted_caramel':
+            case 'sweet_amarula':
+                additionalDays = 45;
+                break;
+            case 'malt_tease_me_ice_cream':
+                additionalDays = 39;
+                break;
+            case 'midnight_delight':
+            case 'chocolate_chipper':
+                additionalDays = 56;
+                break;
+            case 'malted_chocolate_ice_cream':
+            case 'americone_ice_cream':
+            case 'henenessy_ice_cream':
+            case 'cookies_cream':
+            case 'cookie_dough':
+            case 'rum_raisin':
+            case 'chocolate_creamery_fudge':
+            case 'sweet_malted_cream':
+            case 'creamery_delight':
+            case 'sweet_pineapple_cream':
+            case 'cheesecake_lotus':
+            case 'yellow_cake':
+            case 'chocolate_cake':
+            case 'red_velvet':
+            case 'brownie':
+                additionalDays = 30;
+                break;
+            case 'birthday_cake':
+            case 'strawberry_passion':
+            case 'cookies_creamery':
+            case 'pinacolada':
+            case 'cheesecake_named_desire':
+            case 'cookie_dough_delirium':
+                additionalDays = 28;
+                break;
+            case 'better_cream':
+                additionalDays = 14;
+                break;
+            case 'thawed_mix':
+                additionalDays = 7;
+                break;
+            case 'cookie_dough':
+                additionalDays = 5;
+                break;
+            case 'strawberry_iqf':
+            case 'blueberry_iqf':
+            case 'raspberry_iqf':
+                additionalDays = 4;
+                break;
+            case 'pineapple_tidbit':
+                additionalDays = 3;
+                break;
+
+        default:
+           additionalDays = 5;
+           break;
+
+        }
+        var expiryDate = new Date(productionDate);
+        expiryDate.setDate(expiryDate.getDate() + additionalDays);
+        document.getElementById('expiryDate').valueAsDate = expiryDate;
+
+    }
+</script>
+
+</body>
+</html>

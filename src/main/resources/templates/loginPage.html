@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Login page</title>
+    <link th:href="@{/css/main.css}" rel="stylesheet" />
+</head>
+<body>
+<form th:action="@{/login}" method="post" th:object="${user}">
+    <div class="container">
+        <img src="css/logo.png" alt="Logo" style="display: block; margin: 0 auto; width: 50%;">
+        <hr>
+        <label for="email">Email</label>
+        <input type="text" id="email" name="email" placeholder="Email" th:field="*{email}" required>
+
+        <label for="password">Password</label>
+        <input type="password" id="password" name="password" placeholder="Password" th:field="*{password}" required>
+        <button type="submit" class="registerbtn">Login</button>
+        <p>Don't have an account? <a th:href="@{/registration}">Register</a></p>
+        <p th:if="${error != null}" th:text="${error}" style="color: red;"></p>
+    </div>
+</form>
+</body>
+</html>

@@ -1,0 +1,178 @@
+body {
+  font-family: Arial, Helvetica, sans-serif;
+  background-image: url("background.png");
+  padding-top: 3%;
+  padding-left:0px;
+  padding-right:0px;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+.container {
+  padding: 16px;
+  background-color: white;
+  width: 50%;
+  margin: auto;
+  border-radius: 5px;
+  }
+
+  .container3 {
+  margin-top: 3%;
+      padding-left: 15px;
+      padding-right: 15px;
+      padding-top: 10px;
+      padding-bottom: 10px;
+      background-color: white;
+      width: 100%;
+      justify-content: center;
+    }
+
+    .container2 {
+      margin-bottom: 3%;
+      padding-left: 15px;
+      padding-right: 15px;
+      padding-top: 10px;
+      padding-bottom: 10px;
+      background-color: white;
+      width: 100%;
+      border-radius: 0;
+      border: 1px white solid;
+      display: flex;
+      justify-content: space-between;
+      }
+
+input[type=text], input[type=password] {
+  width: 100%;
+  padding: 15px;
+  margin: 5px 0 22px 0;
+  display: inline-block;
+  border: none;
+  background: #f1f1f1;
+}
+
+input[type=text]:focus, input[type=password]:focus {
+  background-color: #ddd;
+  outline: none;
+}
+
+.error{
+   color: red;
+   padding-bottom: 10px;
+}
+
+hr {
+  border: 1px solid #f1f1f1;
+  margin-bottom: 25px;
+}
+
+.registerbtn {
+  background-color: #6A050F;
+  color: white;
+  padding: 16px 20px;
+  margin: auto;
+  border: none;
+  cursor: pointer;
+  width: 50%;
+  opacity: 0.9;
+  display: flex;
+  justify-content: center;
+  align-items: center;}
+
+.registerbtn:hover {
+  opacity: 1;
+}
+
+a {
+  color: #6A050F;
+  text-decoration: none;
+}
+
+a:hover{
+opacity: 3;
+}
+
+.signin {
+  background-color: #f1f1f1;
+  text-align: center;
+}
+
+#reader {
+   width: 100%;
+   height: 300px;
+   border: 1px solid #ccc;
+   margin: auto;
+    }
+ table, th, td {
+        border: 1px solid black;
+    }
+
+    th, td {
+        padding: 8px;
+        text-align: left;
+    }
+
+    th {
+        background-color: #fff;
+        color: black;
+    }
+
+    td {
+        background-color: #fff;
+    }
+
+    .containerTable{
+      padding: 16px;
+      background-color: #6A050F;
+      width: 90%;
+      margin: auto;
+      border-radius: 5px;
+    }
+
+    input, select {
+        width: 100%;
+        padding: 6px;
+        box-sizing: border-box;
+    }
+
+#saveButton {
+  margin-top: 10px;
+          padding: 10px 20px;
+          background-color:    <button id="saveButton" class="registerbtn">Save</button>
+;
+          color: #fff;
+          border: none;
+          border-radius: 5px;
+          cursor: pointer;
+          position: absolute;
+          left: 50%;
+          transform: translateX(-50%);
+          width: 200px;
+          }
+
+#saveButton:hover {
+  opacity: 1;
+}
+
+.logo {
+    display: block;
+    margin: 0 auto;
+    width: 50%;
+    height: auto;
+}
+
+.scannerBtn {
+  background-color: #6A050F;
+  color: white;
+  padding: 12px 15px;
+  margin: 0px 0px 0px 0px;
+  border: none;
+  cursor: pointer;
+  width: 100%;
+  opacity: 0.9;
+  border-radius: 5px;
+}
+
+
+

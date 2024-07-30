@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Home page</title>
+    <link th:href="@{/css/main.css}" rel="stylesheet" />
+</head>
+<body>
+<div class="container">
+    <img src="css/logo.png" alt="Logo" style="display: block; margin: 0 auto; width: 50%;">
+    <hr>
+<h1 style="color: #080402; text-align: center;">Cold Stone Creamery Commissary</h1>
+    <h3 style="color: #080402; text-align: center; padding-bottom: 5%;">QR Code Generator and Scanner</h3>
+    <a style="text-decoration: none" th:href="@{/registration}">
+        <button type="submit" class="registerbtn">Register</button>
+    </a><br><br>
+    <a style="text-decoration: none" th:href="@{/loginPage}">
+        <button type="submit" class="registerbtn" >Login</button>
+    </a>
+</div>
+</body>
+</html>
